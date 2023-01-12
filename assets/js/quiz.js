@@ -102,37 +102,44 @@ function UpdateTimer() {
         --time;
         timeOutput.textContent = time;
         if(time <= 0) {
-            //TODO: we've run out of time
-
-
             clearInterval(timer);
+            IncorrectAnswer('timeless');
         }
     }, 1000);
 }
 
-function UpdateSessionStats(lastCorrect) {
+//eventIndex 0 = incorrect, 1 = correct, 2 = ran out of time
+function UpdateSessionStats(eventIndex) {
     sessionStats.innerHTML = "";
     var status = document.createElement('i');
-    status.textContent = 'You got that last quote ';
-    if(lastCorrect) {
-        status.textContent += "correct!!!";
+    if(eventIndex !== 2) {
+        status.textContent = 'You got that last quote ';
+        if(eventIndex === 1) {
+            status.textContent += "correct!!!";
+        } else {
+            status.textContent += "incorrect. :(";
+        }
     } else {
-        status.textContent += "incorrect. :(";
+        status.textContent = "Ran out of time on that last one. :(";
     }
     sessionStats.textContent = stats.correct + " / " + (stats.correct + stats.incorrect) + " - ";
     sessionStats.append(status);
 }
 
 function IncorrectAnswer(event) {
+    var ind = 0;
+    if(event === 'timeless') {
+        ind = 2;
+    }
     stats.streak = 0;
     stats.incorrect++;
-    UpdateSessionStats(false);
+    UpdateSessionStats(ind);
     NewQuestion();
 }
 function CorrectAnswer(event) {
     stats.streak++;
     stats.correct++;
-    UpdateSessionStats(true);
+    UpdateSessionStats(1);
     NewQuestion();
 }
 
