@@ -4,9 +4,44 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Trump or Yeezy???</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
+    <h1> Trump or Ye? </h1>
     <script src="./assets/js/trumpye.js"></script>
+<header>
+    <div class ="quiz-details">
+        <div id="Welcome message">
+            <h2 id ="Welcome"> Welcome to the Trump or Ye Quote Guessing Game </h2>
+            <h3 id ="Instructions">In this game, you will be given a random quote from either Donald Trump or Kanye West.
+                it is your job to decide who the quote came from. You will be given 10 seconds to answer each question so Choose wisely! Goodluck! 
+            </h3>
+        </div>
+    </div>
+    <div class = "play-btn">
+        <button onclick ="startGame()" id = "play">START</button>
+    </div>
+</header>
+
+<div class="container">
+    <div id="quotes">
+    <div id="questionCount"></div>
+    <button onclick="quit()" id="goHome">Home</button>
+    <button onclick="reset()" id ="restart">Reset</button>
+    <button onclick="trump()" id="trumpQuote">TRUMP</button>
+    <button onclick="ye()" id="yeQuote">KANYE</button>
+    <div id="score"></div>
+    </div>
+</div>
+
+<div class="lastPage">
+    <div id="winner">
+        YOU WIN!<br>You're a TrumpYE Expert!
+    </div>
+    <div id="loser">
+        YOU LOSE!<br>Sorry, you must think Trump and Ye are the same person. Please try again.
+    </div>
+</div>
 </body>
 </html>
