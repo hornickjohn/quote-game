@@ -1,8 +1,23 @@
 const key = '3c8e64354d489af483aa7662746a4745';
+
+//page elements for quiz questions
 var questionOutput = document.getElementById('question');
 var answerButtons = document.getElementsByClassName('answer-button');
 var correctIndex;
 var recentIDs = [];
+
+//stats this session
+var stats = {
+    streak:0,
+    correct:0,
+    incorrect:0
+}
+
+//globals for handling timer
+const timeLimit = 10;
+var timer;
+var time;
+var timeOutput = document.getElementById('time');
 
 function NewQuestion() {
     ClearPage();
@@ -18,11 +33,12 @@ function NewQuestion() {
         })
         .then(function (data) {
             //TODO potentially keep track of previously answered quotes to ensure no repeats
-            if(data.quotes[0].author.toLowerCase().includes('author') || 
-            recentIDs.includes(data.quotes[0].id)) {
+            if(data === undefined || recentIDs.includes(data.quotes[0].id)) {
                 NewQuestion();
                 return;
             }
+
+            UpdateUI();
 
             questionOutput.textContent = data.quotes[0].body;
 
@@ -43,7 +59,7 @@ function NewQuestion() {
                 else if(currentButton == correctIndex) {
                     ++currentButton;
                 }
-                else if(!usedAuthors.includes(data.quotes[i].author)) {
+                else if(!usedAuthors.includes(data.quotes[i].author) && !data.quotes[i].author.toLowerCase().includes('author')) {
                     usedAuthors.push(data.quotes[i].author);
                     answerButtons[currentButton].textContent = data.quotes[i].author;
                     ++currentButton;
@@ -76,13 +92,31 @@ function ClearPage() {
     }
 }
 
+function UpdateUI() {
+    clearInterval(timer);
+    time = timeLimit;
+    timeOutput.textContent = time;
+    timer = setInterval(function () {
+        --time;
+        timeOutput.textContent = time;
+        if(time <= 0) {
+            //TODO: we've run out of time
+
+            clearInterval(timer);
+        }
+    }, 1000);
+}
+
 function IncorrectAnswer(event) {
-    alert('wrong');
+    stats.streak = 0;
+    stats.incorrect++;
     NewQuestion();
 }
 function CorrectAnswer(event) {
-    alert('right');
+    stats.streak++;
+    stats.correct++;
     NewQuestion();
 }
 
+UpdateUI();
 NewQuestion();
