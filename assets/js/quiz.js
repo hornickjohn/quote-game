@@ -2,6 +2,7 @@ const key = '3c8e64354d489af483aa7662746a4745';
 var questionOutput = document.getElementById('question');
 var answerButtons = document.getElementsByClassName('answer-button');
 var correctIndex;
+var recentIDs = [];
 
 function NewQuestion() {
     ClearPage();
@@ -17,17 +18,22 @@ function NewQuestion() {
         })
         .then(function (data) {
             //TODO potentially keep track of previously answered quotes to ensure no repeats
-            console.log(data.quotes[0]);
+            if(data.quotes[0].author.toLowerCase().includes('author') || 
+            recentIDs.includes(data.quotes[0].id)) {
+                NewQuestion();
+                return;
+            }
 
             questionOutput.textContent = data.quotes[0].body;
 
+            //set correct answer button
             correctIndex = Math.floor(Math.random() * 4);
             answerButtons[correctIndex].textContent = data.quotes[0].author;
             answerButtons[correctIndex].removeEventListener('click', IncorrectAnswer);
             answerButtons[correctIndex].removeEventListener('click', CorrectAnswer);
             answerButtons[correctIndex].addEventListener('click', CorrectAnswer);
 
-
+            //go through quotes and grab other authors to offer as incorrect answers
             var usedAuthors = [data.quotes[0].author];
             var currentButton = 0;
             for(var i = 1; i < data.quotes.length; i++) {
@@ -47,6 +53,12 @@ function NewQuestion() {
             if(!(currentButton >= 4)) {
                 NewQuestion();
                 return;
+            }
+
+            //store this as a recent ID so we don't repeat it
+            recentIDs.push(data.quotes[0].id);
+            if(recentIDs.length > 10) {
+                recentIDs.splice(0,recentIDs.length - 10);
             }
         });
 }
