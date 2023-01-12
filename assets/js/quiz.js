@@ -19,6 +19,8 @@ var timer;
 var time;
 var timeOutput = document.getElementById('time');
 
+var sessionStats = document.getElementById('session-stats');
+
 function NewQuestion() {
     ClearPage();
 
@@ -32,13 +34,13 @@ function NewQuestion() {
             return response.json();
         })
         .then(function (data) {
-            //TODO potentially keep track of previously answered quotes to ensure no repeats
-            if(data === undefined || recentIDs.includes(data.quotes[0].id)) {
+            //check for bad or undefined data, or a repeat question
+            if(data.status !== undefined || data.quotes[0].body.toLowerCase().includes('body') || recentIDs.includes(data.quotes[0].id)) {
                 NewQuestion();
                 return;
             }
 
-            UpdateUI();
+            UpdateTimer();
 
             questionOutput.textContent = data.quotes[0].body;
 
@@ -59,7 +61,7 @@ function NewQuestion() {
                 else if(currentButton == correctIndex) {
                     ++currentButton;
                 }
-                else if(!usedAuthors.includes(data.quotes[i].author) && !data.quotes[i].author.toLowerCase().includes('author')) {
+                else if(data.quotes[i].author !== undefined && !usedAuthors.includes(data.quotes[i].author) && !data.quotes[i].author.toLowerCase().includes('author')) {
                     usedAuthors.push(data.quotes[i].author);
                     answerButtons[currentButton].textContent = data.quotes[i].author;
                     ++currentButton;
@@ -92,7 +94,7 @@ function ClearPage() {
     }
 }
 
-function UpdateUI() {
+function UpdateTimer() {
     clearInterval(timer);
     time = timeLimit;
     timeOutput.textContent = time;
@@ -102,21 +104,37 @@ function UpdateUI() {
         if(time <= 0) {
             //TODO: we've run out of time
 
+
             clearInterval(timer);
         }
     }, 1000);
 }
 
+function UpdateSessionStats(lastCorrect) {
+    sessionStats.innerHTML = "";
+    var status = document.createElement('i');
+    status.textContent = 'You got that last quote ';
+    if(lastCorrect) {
+        status.textContent += "correct!!!";
+    } else {
+        status.textContent += "incorrect. :(";
+    }
+    sessionStats.textContent = stats.correct + " / " + (stats.correct + stats.incorrect) + " - ";
+    sessionStats.append(status);
+}
+
 function IncorrectAnswer(event) {
     stats.streak = 0;
     stats.incorrect++;
+    UpdateSessionStats(false);
     NewQuestion();
 }
 function CorrectAnswer(event) {
     stats.streak++;
     stats.correct++;
+    UpdateSessionStats(true);
     NewQuestion();
 }
 
-UpdateUI();
+UpdateTimer();
 NewQuestion();
