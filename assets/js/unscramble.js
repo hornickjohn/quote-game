@@ -27,6 +27,16 @@ var currentAnswer = "";
 var currentScramble = [];
 var currentScrambleElements;
 
+var statsOnLoad = localStorage.getItem('woq_stats_unscramble');
+console.log(statsOnLoad);
+if(statsOnLoad === null) {
+    statsOnLoad = {
+        correct:0,
+        incorrect:0,
+        maxstreak:0
+    }
+}
+
 //if enter is pressed and no game is currently in session, start one
 document.onkeyup = function(event) {
     if (currentAnswer === "" && event.key === "Enter") {
@@ -150,6 +160,9 @@ function Win() {
     currentAnswer = "";
     stats.correct++;
     stats.streak++;
+
+    SaveStats();
+
     messageOutput.textContent = "Well done! Current win streak: " + stats.streak + "!\n\nPress 'enter' to continue.";
     UpdateSessionStats(true);
 }
@@ -160,7 +173,18 @@ function Lose() {
     currentAnswer = "";
     stats.incorrect++;
     stats.streak = 0;
+
+    SaveStats();
+
     UpdateSessionStats(false);
+}
+
+function SaveStats() {
+    var newStats = {c:0,i:0,s:0};
+    newStats.c = statsOnLoad.correct + stats.correct;
+    newStats.i = statsOnLoad.incorrect + stats.incorrect;
+    newStats.s = Math.max(statsOnLoad.maxstreak,stats.streak);
+    localStorage.setItem('woq_stats_unscramble', JSON.stringify(newStats));
 }
 
 function UpdateSessionStats(lastCorrect) {

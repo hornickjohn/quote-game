@@ -14,7 +14,22 @@ var done = false;
 var stats = {
     //max QPM and WPM this session
     q_max:0,
-    w_max:0
+    w_max:0,
+    totalwords:0,
+    totalquotes:0,
+    totaltime:0
+}
+
+//local storage stats
+var statsOnLoad = localStorage.getItem('woq_stats_qpm');
+if(statsOnLoad === null) {
+    statsOnLoad = {
+        maxqpm:0,
+        maxwpm:0,
+        totalwords:0,
+        totalquotes:0,
+        totaltime:0
+    }
 }
 
 //globals for handling timer
@@ -100,6 +115,10 @@ input.addEventListener('input', function() {
         if(currentQuoteIndex < quotes.length) {
             SetupQuote();
         } else {
+            stats.totalwords += currentWordCount;
+            stats.totalquotes += totalQuotesPerRun;
+            stats.totaltime += time;
+            SaveStats();
             done = true;
             document.getElementById('start').classList.remove('hidden');
         }
@@ -158,4 +177,14 @@ function GetGoodQuote(num, endfunc) {
                 endfunc.apply();
             }
         });
+}
+
+function SaveStats() {
+    var newStats = {maxq:0,maxw:0,totalq:0,totalw:0,totalt};
+    newStats.maxq = Math.max(statsOnLoad.maxqpm, stats.q_max);
+    newStats.maxw = Math.max(statsOnLoad.maxwpm, stats.w_max);
+    newStats.totalq = statsOnLoad.totalquotes + stats.totalquotes;
+    newStats.totalw = statsOnLoad.totalwords + stats.totalwords;
+    newStats.totalt = statsOnLoad.totaltime + stats.totaltime;
+    localStorage.setItem('woq_stats_qpm', JSON.stringify(newStats));
 }
