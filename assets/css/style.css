@@ -1,0 +1,21 @@
+
+.initial-header {
+    font-family: 'Merriweather Sans', sans-serif; 
+    color: aliceblue;
+    font-size: 65px;
+    text-align: center;
+    text-shadow: cadetblue -3px 4px;
+    background-color: black;
+}
+
+.columns {
+    text-align: center;
+    padding-top: 10%
+    
+}
+
+.dad-joke {
+    text-align: center;
+    padding-top: 25vh;
+    display: flex,
+}
