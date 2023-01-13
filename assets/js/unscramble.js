@@ -82,7 +82,11 @@ function StartNew() {
             var quote = undefined;
             //get a quote with good data and an appropriate length
             for(var i = 0; i < data.quotes.length; i++) {
-                if(!(data.quotes[i].body.toLowerCase().includes('body') || data.quotes[i].body.length < 20 || data.quotes[i].body.length > 100 || recentIDs.includes(data.quotes[i].id))) {
+                if(!(data.quotes[i].body.toLowerCase().includes('body') || 
+                data.quotes[i].body.length < 20 || 
+                data.quotes[i].body.length > 100 || 
+                recentIDs.includes(data.quotes[i].id) || 
+                !IsAcceptableString(data.quotes[i].body))) {
                     quote = data.quotes[i];
                     break;
                 }
@@ -169,4 +173,16 @@ function ClearPage() {
     messageOutput.innerHTML = "";
     input.value = "";
     input.focus();
+}
+
+function IsAcceptableCharacter(char) {
+    return 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789,.?\'":; '.includes(char);
+}
+function IsAcceptableString(str) {
+    for(var i = 0; i < str.length; i++) {
+        if(!IsAcceptableCharacter(str[i])) {
+            return false;
+        }
+    }
+    return true;
 }
