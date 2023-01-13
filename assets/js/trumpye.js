@@ -12,9 +12,21 @@ var timeOutput = document.getElementById('time');
 var stats = {
     streak:0,
     correct:0,
-    incorrect:0
+    incorrect:0,
+    timedout:0
 }
 var sessionStats = document.getElementById('session-stats');
+
+//local storage stats
+var statsOnLoad = localStorage.getItem('woq_stats_trumpye');
+if(statsOnLoad === null) {
+    statsOnLoad = {
+        correct:0,
+        incorrect:0,
+        maxstreak:0,
+        timedout:0
+    }
+}
 
 //navigates to home page
 function quit() {
@@ -63,7 +75,7 @@ function trump() {
     if(currentlyTrump) {
         Win();
     } else {
-        Lose();
+        Lose(false);
     }
 }
 
@@ -72,20 +84,25 @@ function ye() {
     if(!currentlyTrump) {
         Win();
     } else {
-        Lose();
+        Lose(false);
     }
 }
 
 function Win() {
     stats.correct++;
     stats.streak++;
+    SaveStats();
     clearInterval(timer);
     HideDisplay(false, true, false, true);
     UpdateSessionStats();
 }
-function Lose() {
+function Lose(lostbytime) {
     stats.incorrect++;
     stats.streak = 0;
+    if(lostbytime) {
+        stats.timedout++;
+    }
+    SaveStats();
     clearInterval(timer);
     HideDisplay(false, false, true, true);
     UpdateSessionStats();
@@ -123,7 +140,7 @@ function UpdateTimer() {
         timeOutput.textContent = time;
         if(time <= 0) {
             clearInterval(timer);
-            Lose();
+            Lose(true);
         }
     }, 1000);
 }
@@ -131,6 +148,15 @@ function UpdateTimer() {
 function UpdateSessionStats() {
     sessionStats.textContent = stats.correct + " / " + (stats.correct + stats.incorrect);
     document.getElementById('streak').textContent = stats.streak;
+}
+
+function SaveStats() {
+    var newStats = {c:0,i:0,s:0,t:0};
+    newStats.c = statsOnLoad.correct + stats.correct;
+    newStats.i = statsOnLoad.incorrect + stats.incorrect;
+    newStats.s = Math.max(statsOnLoad.maxstreak,stats.streak);
+    newStats.t = statsOnLoad.timedout + stats.timedout;
+    localStorage.setItem('woq_stats_trumpye', JSON.stringify(newStats));
 }
 
 //Initialize page
