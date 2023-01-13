@@ -1,0 +1,16 @@
+.hidden {
+    display:none;
+}
+#filled {
+    color:green;
+}
+#unfilled {
+    color:black;
+}
+#wrong {
+    color:red;
+}
+#qpm-input {
+    position: absolute;
+    left:-500px;
+}
