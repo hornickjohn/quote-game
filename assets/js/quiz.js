@@ -12,14 +12,13 @@ var stats = {
     correct:0,
     incorrect:0
 }
+var sessionStats = document.getElementById('session-stats');
 
 //globals for handling timer
 const timeLimit = 10;
 var timer;
 var time;
 var timeOutput = document.getElementById('time');
-
-var sessionStats = document.getElementById('session-stats');
 
 function NewQuestion() {
     ClearPage();
