@@ -1,0 +1,35 @@
+.hidden {
+    display:none;
+}
+#filled {
+    color:green;
+}
+#unfilled {
+    color:black;
+}
+#wrong {
+    color:red;
+}
+#qpm-input {
+    position: absolute;
+    left:-500px;
+}
+
+.dad-joke {
+    font-family:'Anton', sans-serif;
+    font-size: 25px;
+    text-align: center;
+    padding-top: 75px;
+}
+
+.initial-header {
+    background-color: black;
+    outline: 15px solid cadetblue;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-size: 75px;
+    text-align: center;
+    color: white;
+    text-shadow: cadetblue -3px 4px;
+    margin-bottom: 45px;
+
+}
