@@ -1,5 +1,7 @@
 var currentlyTrump;
 
+var recentQuotes = [];
+
 //globals for handling timer
 const timeLimit = 10;
 var timer;
@@ -32,6 +34,7 @@ function startGame() {
             return response.json();
         })
         .then(function (data) {
+            RecentQuote(data.value);
             document.getElementById("quote-output").textContent = data.value;
         });
     } else {
@@ -45,6 +48,13 @@ function startGame() {
         .then(function (data) {
             document.getElementById("quote-output").textContent = data.quote;
         });
+    }
+}
+
+function RecentQuote(content) {
+    recentQuotes.push(content);
+    if(recentQuotes.length > 10) {
+        recentQuotes.splice(0, 1);
     }
 }
 

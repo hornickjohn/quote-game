@@ -34,7 +34,7 @@ function NewQuestion() {
         })
         .then(function (data) {
             //check for bad or undefined data, or a repeat question
-            if(data.status !== undefined || data.quotes[0].body.toLowerCase().includes('body') || recentIDs.includes(data.quotes[0].id)) {
+            if(data.status !== undefined || data.quotes[0].body.toLowerCase().includes('body') || data.quotes[0].body.toLowerCase().includes('<br>') || recentIDs.includes(data.quotes[0].id)) {
                 NewQuestion();
                 return;
             }
