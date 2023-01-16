@@ -10,6 +10,7 @@ var timeOutput = document.getElementById('time');
 
 //stats this session
 var stats = {
+    beststreak:0,
     streak:0,
     correct:0,
     incorrect:0,
@@ -18,7 +19,7 @@ var stats = {
 var sessionStats = document.getElementById('session-stats');
 
 //local storage stats
-var statsOnLoad = localStorage.getItem('woq_stats_trumpye');
+var statsOnLoad = JSON.parse(localStorage.getItem('woq_stats_trumpye'));
 if(statsOnLoad === null) {
     statsOnLoad = {
         correct:0,
@@ -91,6 +92,7 @@ function ye() {
 function Win() {
     stats.correct++;
     stats.streak++;
+    stats.beststreak = Math.max(stats.beststreak, stats.streak);
     SaveStats();
     clearInterval(timer);
     HideDisplay(false, true, false, true);
@@ -151,11 +153,11 @@ function UpdateSessionStats() {
 }
 
 function SaveStats() {
-    var newStats = {c:0,i:0,s:0,t:0};
-    newStats.c = statsOnLoad.correct + stats.correct;
-    newStats.i = statsOnLoad.incorrect + stats.incorrect;
-    newStats.s = Math.max(statsOnLoad.maxstreak,stats.streak);
-    newStats.t = statsOnLoad.timedout + stats.timedout;
+    var newStats = {correct:0,incorrect:0,maxstreak:0,timedout:0};
+    newStats.correct = statsOnLoad.correct + stats.correct;
+    newStats.incorrect = statsOnLoad.incorrect + stats.incorrect;
+    newStats.maxstreak = Math.max(statsOnLoad.maxstreak, stats.beststreak);
+    newStats.timedout = statsOnLoad.timedout + stats.timedout;
     localStorage.setItem('woq_stats_trumpye', JSON.stringify(newStats));
 }
 

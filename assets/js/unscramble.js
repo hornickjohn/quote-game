@@ -10,6 +10,7 @@ var recentIDs = [];
 
 //stats this session
 var stats = {
+    maxstreak:0,
     streak:0,
     correct:0,
     incorrect:0
@@ -27,7 +28,7 @@ var currentAnswer = "";
 var currentScramble = [];
 var currentScrambleElements;
 
-var statsOnLoad = localStorage.getItem('woq_stats_unscramble');
+var statsOnLoad = JSON.parse(localStorage.getItem('woq_stats_unscramble'));
 console.log(statsOnLoad);
 if(statsOnLoad === null) {
     statsOnLoad = {
@@ -160,6 +161,7 @@ function Win() {
     currentAnswer = "";
     stats.correct++;
     stats.streak++;
+    stats.maxstreak = Math.max(stats.streak, stats.maxstreak);
 
     SaveStats();
 
@@ -180,10 +182,10 @@ function Lose() {
 }
 
 function SaveStats() {
-    var newStats = {c:0,i:0,s:0};
-    newStats.c = statsOnLoad.correct + stats.correct;
-    newStats.i = statsOnLoad.incorrect + stats.incorrect;
-    newStats.s = Math.max(statsOnLoad.maxstreak,stats.streak);
+    var newStats = {correct:0,incorrect:0,maxstreak:0};
+    newStats.correct = statsOnLoad.correct + stats.correct;
+    newStats.incorrect = statsOnLoad.incorrect + stats.incorrect;
+    newStats.maxstreak = Math.max(statsOnLoad.maxstreak, stats.maxstreak);
     localStorage.setItem('woq_stats_unscramble', JSON.stringify(newStats));
 }
 
