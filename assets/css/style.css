@@ -39,7 +39,7 @@
 
 
 
-.bgd{
+.bgd {
     background-image: url(https://www.sciencenews.org/wp-content/uploads/2018/05/050718_EC_numbers_feat.jpg);
     height: 150vh;
     background-position: center;
@@ -76,8 +76,22 @@
     color: black;
 }
 
-.stats-button {
-    font-size: 20px;
+.stats {
+    font-size: 45px;
     text-align: center;
+}
+
+.stats-btn {
+    font-size: 40px;
+    text-align: center;
+    color: white;
+    background-color: black;
+    border: solid cadetblue 5px;
+    border-radius: 50px;
+}
+
+.stats-btn:hover{
+    background-color: cadetblue;
+    color: white;
 }
 
