@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Quote Stats</title>
+</head>
+
+<header>
+    <h1 class="stats-header">Stats Page</h1>
+    <button class="button-back" onclick="location.href='./index.html';">Home</button>
+</header>
+
+<body class="bgd">
+    <div class="content">
+        <div class="background-img">
+        </div>
+        <div class="tile is-ancestor">
+            <div class="tile is-vertical is-parent">
+                <div id="trumpye" class="tile is-child notification is-info">
+                    <h2>
+                        Trump or Ye?
+                    </h2>
+                    <div id="trumpye_content">
+                        <p>Guessed Correctly: <span id="trumpye_correct"></span> times.</p>
+                        <p>Guessed Wrong: <span id="trumpye_incorrect"></span> times.</p>
+                        <p>Ran out of Time: <span id="trumpye_timedout"></span> times.</p>
+                        <p>Highest streak: <span id="trumpye_maxstreak"></span> correct guesses.</p>
+                    </div>
+                    <p id="trumpye_nocontent" class="hidden">Trump or Ye not yet played - go try it now!</p>
+                </div>
+                <div id="unscramble" class="tile is-child notification is-primary">
+                    <h2>
+                        Unscramble
+                    </h2>
+                    <div id="unscramble_content">
+                        <p>Solved the Puzzle: <span id="unscramble_correct"></span> times.</p>
+                        <p>Ran out of Time: <span id="unscramble_incorrect"></span> times.</p>
+                        <p>Highest streak: <span id="unscramble_maxstreak"></span> solved puzzles.</p>
+                    </div>
+                    <p id="unscramble_nocontent" class="hidden">Unscramble not yet played - go try it now!</p>
+                </div>
+            </div>
+            <div class="tile is-vertical is-parent">
+                <div id="quiz" class="tile is-child notification is-primary">
+                    <h2>
+                        Quote Quiz
+                    </h2>
+                    <div id="quiz_content">
+                        <p>Guessed Correctly: <span id="quiz_correct"></span> times.</p>
+                        <p>Guessed Wrong: <span id="quiz_incorrect"></span> times.</p>
+                        <p>Ran out of Time: <span id="quiz_timedout"></span> times.</p>
+                        <p>Highest streak: <span id="quiz_maxstreak"></span> correct guesses.</p>
+                    </div>
+                    <p id="quiz_nocontent" class="hidden">Quiz not yet played - go try it now!</p>
+                </div>
+                <div id="qpm" class="tile is-child notification is-info">
+                    <h2>
+                        Quotes per Minute
+                    </h2>
+                    <div id="qpm_content">
+                        <p>Highest Quotes-per-Minute: <span id="qpm_maxqpm"></span></p>
+                        <p>Highest Words-per-Minute: <span id="qpm_maxwpm"></span></p>
+                        <p>Average QPM: <span id="qpm_averageqpm"></span></p>
+                        <p>Average WPM: <span id="qpm_averagewpm"></span></p>
+                    </div>
+                    <p id="qpm_nocontent" class="hidden">QPM not yet played - go try it now!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./assets/js/stats.js"></script>
+</body>
+</html>

@@ -1,5 +1,88 @@
+
+
 .hidden {
     display:none;
+}
+
+h3{
+    word-wrap: normal;
+}
+
+.container{
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: rgba(138, 138, 138, 0.3);
+    border-radius: 12px;
+    
+
+}
+
+header{
+    font-size: larger;
+    text-align: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+body{
+    text-align: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+#time{
+    margin-top: 30px;
+    font-size: 50px;
+}
+
+#session-stats{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 30px;
+}
+
+#quote-output{
+    font-size: 40px;
+}
+
+#trumpQuote{
+    margin-top: 30px;
+    background-color: red;
+    font-size: 16px;
+    padding: 15px 32px;
+    margin-right: 20px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+#yeQuote{
+    margin-top: 30px;
+    color: azure;
+    background-color: blue;
+    font-size: 16px;
+    padding: 15px 32px;  
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+#start{
+    color: azure;
+    background: linear-gradient(-60deg, red 50%, blue 50% );
+    margin-top: 40px;
+    font-size: 80px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+#go-home{
+    color: azure;
+    background: linear-gradient(-60deg,blue 50%, red 50%);
+    font-size: 30px;
+    margin-top: 30px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.lastPage{
+    font-size: larger;
 }
 #filled {
     color:green;
@@ -15,7 +98,7 @@
     left:-500px;
 }
 
-.dad-joke {
+.joke-style {
     font-family:'Anton', sans-serif;
     font-size: 25px;
     text-align: center;
@@ -31,5 +114,67 @@
     color: white;
     text-shadow: cadetblue -3px 4px;
     margin-bottom: 45px;
-
 }
+
+.joke-output {
+    font-family: monospace;
+}
+
+
+
+.bgd {
+    background-image: url(https://www.sciencenews.org/wp-content/uploads/2018/05/050718_EC_numbers_feat.jpg);
+    height: 150vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+} 
+
+.content {
+    position: relative;
+    opacity: 1;
+}
+
+.stats-header {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color:whitesmoke;
+    text-align: center;
+    font-size: 50px;
+    background-color: black;
+    border-bottom: solid whitesmoke 5px;
+    margin-bottom: 15px; ;
+  
+}
+
+.button-back {
+    text-align: center;
+    font-size: 35px;
+    color: whitesmoke;
+    background-color: black;
+    
+}
+
+.button-back:hover{
+    background-color: whitesmoke;
+    color: black;
+}
+
+.stats {
+    font-size: 45px;
+    text-align: center;
+}
+
+.stats-btn {
+    font-size: 40px;
+    text-align: center;
+    color: white;
+    background-color: black;
+    border: solid cadetblue 5px;
+    border-radius: 50px;
+}
+
+.stats-btn:hover{
+    background-color: cadetblue;
+    color: white;
+}
+

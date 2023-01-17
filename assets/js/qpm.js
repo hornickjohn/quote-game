@@ -21,7 +21,7 @@ var stats = {
 }
 
 //local storage stats
-var statsOnLoad = localStorage.getItem('woq_stats_qpm');
+var statsOnLoad = JSON.parse(localStorage.getItem('woq_stats_qpm'));
 if(statsOnLoad === null) {
     statsOnLoad = {
         maxqpm:0,
@@ -45,6 +45,8 @@ var sessionStats = document.getElementById('session-stats');
 var filled = document.getElementById('filled');
 var unfilled = document.getElementById('unfilled');
 var wrong = document.getElementById('wrong');
+
+document.getElementById('home-btn').addEventListener('click', GoHome);
 
 function StartNew() {
     //get data
@@ -73,6 +75,11 @@ function FireGame() {
             if(stats.w_max < WPM) {
                 stats.w_max = WPM;
             }
+            stats.totalwords += currentWordCount;
+            stats.totalquotes += totalQuotesPerRun;
+            stats.totaltime += time;
+            SaveStats();
+            document.getElementById('start').classList.remove('hidden');
             sessionStats.textContent = "Max QPM: " + stats.q_max + " / Max WPM: " + stats.w_max;
         }
     }, 200);
@@ -115,18 +122,15 @@ input.addEventListener('input', function() {
         if(currentQuoteIndex < quotes.length) {
             SetupQuote();
         } else {
-            stats.totalwords += currentWordCount;
-            stats.totalquotes += totalQuotesPerRun;
-            stats.totaltime += time;
-            SaveStats();
             done = true;
-            document.getElementById('start').classList.remove('hidden');
         }
     }
     input.value = "";
 });
-input.addEventListener('focusout', function() {
-    input.focus();
+input.addEventListener('focusout', function(event) {
+    if(event.relatedTarget === null || !event.relatedTarget.classList.contains("home-button")) {
+        input.focus();
+    }
 });
 
 function IsAcceptableCharacter(char) {
@@ -161,6 +165,7 @@ function GetGoodQuote(num, endfunc) {
             quotes = [];
             for(var i = 0; i < data.quotes.length; i++) {
                 if(!data.quotes[i].body.toLowerCase().includes('body') && 
+                !data.quotes[i].author.toLowerCase().includes("adina") && 
                 !recentIDs.includes(data.quotes[i].id) && 
                 IsAcceptableString(data.quotes[i].body)) {
                     quotes.push(data.quotes[i]);
@@ -180,11 +185,16 @@ function GetGoodQuote(num, endfunc) {
 }
 
 function SaveStats() {
-    var newStats = {maxq:0,maxw:0,totalq:0,totalw:0,totalt};
-    newStats.maxq = Math.max(statsOnLoad.maxqpm, stats.q_max);
-    newStats.maxw = Math.max(statsOnLoad.maxwpm, stats.w_max);
-    newStats.totalq = statsOnLoad.totalquotes + stats.totalquotes;
-    newStats.totalw = statsOnLoad.totalwords + stats.totalwords;
-    newStats.totalt = statsOnLoad.totaltime + stats.totaltime;
+    var newStats = {maxqpm:0,maxwpm:0,totalquotes:0,totalwords:0,totaltime:0};
+    newStats.maxqpm = Math.max(statsOnLoad.maxqpm, stats.q_max);
+    newStats.maxwpm = Math.max(statsOnLoad.maxwpm, stats.w_max);
+    newStats.totalquotes = statsOnLoad.totalquotes + stats.totalquotes;
+    newStats.totalwords = statsOnLoad.totalwords + stats.totalwords;
+    newStats.totaltime = statsOnLoad.totaltime + stats.totaltime;
     localStorage.setItem('woq_stats_qpm', JSON.stringify(newStats));
+}
+
+function GoHome(event) {
+    event.preventDefault();
+    location.href = "./index.html";
 }
