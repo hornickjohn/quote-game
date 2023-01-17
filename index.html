@@ -4,10 +4,55 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     
     <title>World of Quotes</title>
 </head>
+
 <body>
+    <header>
+        <h1 class="initial-header" > Choose a game!</h1>
+    </header>
+
+    <main>
+        <div class="columns">
+            <div class="column">
+                <img src="https://people.com/thmb/oTB1OQexOWo4b6Oug8RPUO8igis=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(749x0:751x2):format(webp)/donald-trump-kanye-west-112822-1-1eccb0b0738240198d8f6e1f1ff54e30.jpg " alt="">
+                <button class="button are-medium is-responsive is-fullwidth is-info is-light is-outlined" onclick="location.href='./trumpye.html';">Trump or Ye?</button>
+            </div>
+            <div class="column">
+                <img src="https://images.pexels.com/photos/159866/books-book-pages-read-literature-159866.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+                <button class="button are-medium is-responsive is-fullwidth is-danger is-light is-outlined" onclick="location.href='./quiz.html';">Quote Quiz</button>
+            </div>
+            <div class="column">
+                <img src="https://images.pexels.com/photos/4576302/pexels-photo-4576302.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+                <button class="button are-medium is-responsive is-fullwidth is-warning is-light is-outlined" onclick="location.href='./unscramble.html';">Unscramble!</button>
+            </div>
+            <div class="column">
+                <img src="https://images.pexels.com/photos/1186851/pexels-photo-1186851.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+                <button class="button are-medium is-responsive is-fullwidth is-primary is-light is-outlined" onclick="location.href='./qpm.html';">Speed Test</button>
+            </div>
+          </div>
+
+          <div class="modal">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut odit, eveniet consequatur facere, voluptas harum voluptates debitis, velit officiis possimus dolores eligendi consectetur placeat assumenda obcaecati provident nisi nulla eius.</p>
+            </div>
+            <button class="modal-close is-large" aria-label="close">info</button>
+          </div>
+
+
+        <div class="dad-joke">
+            <h1>dad joke</h1>
+        </div>
+    </main>
+
+
     
     <p id='dad-joke'></p>
     <script src="./assets/js/script.js"></script>
