@@ -46,6 +46,8 @@ var filled = document.getElementById('filled');
 var unfilled = document.getElementById('unfilled');
 var wrong = document.getElementById('wrong');
 
+document.getElementById('home-btn').addEventListener('click', GoHome);
+
 function StartNew() {
     //get data
     GetGoodQuote(totalQuotesPerRun, FireGame);
@@ -125,8 +127,10 @@ input.addEventListener('input', function() {
     }
     input.value = "";
 });
-input.addEventListener('focusout', function() {
-    input.focus();
+input.addEventListener('focusout', function(event) {
+    if(event.relatedTarget === null || !event.relatedTarget.classList.contains("home-button")) {
+        input.focus();
+    }
 });
 
 function IsAcceptableCharacter(char) {
@@ -188,4 +192,9 @@ function SaveStats() {
     newStats.totalwords = statsOnLoad.totalwords + stats.totalwords;
     newStats.totaltime = statsOnLoad.totaltime + stats.totaltime;
     localStorage.setItem('woq_stats_qpm', JSON.stringify(newStats));
+}
+
+function GoHome(event) {
+    event.preventDefault();
+    location.href = "./index.html";
 }
