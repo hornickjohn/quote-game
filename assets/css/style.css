@@ -142,7 +142,7 @@ body{
     font-size: 50px;
     background-color: black;
     border-bottom: solid whitesmoke 5px;
-    margin-bottom: 15px; ;
+    margin-bottom: 15px;
   
 }
 
@@ -151,6 +151,7 @@ body{
     font-size: 35px;
     color: whitesmoke;
     background-color: black;
+    margin-bottom: 25px;
     
 }
 
