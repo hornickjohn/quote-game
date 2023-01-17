@@ -41,14 +41,14 @@ body{
     color: azure;
     background: linear-gradient(-60deg, red 50%, blue 50% );
     margin-top: 40px;
-    font-size: x-large;
+    font-size: 60px;
     border-radius: 12px;
     cursor: pointer;
 }
 #go-home{
     color: azure;
     background: linear-gradient(-60deg,blue 50%, red 50%);
-    font-size: 15px;
+    font-size: 30px;
     margin-top: 30px;
     border-radius: 12px;
     cursor: pointer;
