@@ -6,15 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trump or Yeezy???</title>
     <link rel="stylesheet" href="./assets/css/style.css">
+    
     <link rel="stylesheet" href="./assets/css/trumpye.css">
 </head>
 <body>
-    <h1> Trump or Ye? </h1>
+    <h1> <img src="./assets/images/TrumpYe.jpg" alt=""></h1>
 <header>
     <div class ="quiz-details">
         <div id="Welcome message">
-            <h2 id ="Welcome"> Welcome to the Trump or Ye Quote Guessing Game </h2>
-            <h3 id ="Instructions">In this game, you will be given a random quote from either Donald Trump or Kanye West.
+            <h2 id ="Welcome"> Welcome to the TrumpYe Quote Guessing Game </h2>
+            <h3 id ="Instructions">Instructions: In this game, you will be given a random quote from either Donald Trump or Kanye West.
                 it is your job to decide who the quote came from. You will be given 10 seconds to answer each question so Choose wisely! Goodluck! 
             </h3>
         </div>
@@ -24,19 +25,20 @@
 <div class="container">
     <div id="quote-output"></div>
     <div id="answer-buttons">
-        <button onclick="trump()" id="trumpQuote">TRUMP</button>
-        <button onclick="ye()" id="yeQuote">KANYE</button>
+        <button onclick="trump()" id="trumpQuote"><img src="./assets/images/Trump.jpg" width="100"></button>
+        <button onclick="ye()" id="yeQuote"><img src="./assets/images/Ye.jpg" width="100"></button>
     </div>
     <div id="time">10</div>
     <div id="session-stats">0 / 0</div>
 </div>
+</div>
 
 <div class="lastPage">
     <div id="winner">
-        YOU WIN!<br>You're a TrumpYE Expert! Current streak: <span id="streak"></span>. Another round?
+        <b>YOU WIN!</b><br>You're a TrumpYE Expert! Current streak: <span id="streak"></span>. Another round?
     </div>
     <div id="loser">
-        YOU LOSE!<br>Sorry, you must think Trump and Ye are the same person. Try again?
+        <b>YOU LOSE!</b><br>Sorry, you must think Trump and Ye are the same person. Try again?
     </div>
     <button onclick="startGame()" id="start">Start</button>
 </div>
