@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/qpm.css">
+    <title>Quotes Per Minute</title>
+</head>
+<body>
+    <main>
+        <div class="game-align" id="game-area" >
+            <img class="image-background" src="https://www.guidingtech.com/wp-content/uploads/fix-keyboard-typing-multiple-letters-in-windwos-10_4d470f76dc99e18ad75087b1b8410ea9.jpg" alt="">
+                <p class="instructions" >Instructions:</p>
+                <button class="home-button">home</button>
+                <div class="box-content">
+                    <p id="quote-num"></p>
+                    <p id="quote"><span id="filled"></span><span id="wrong"></span><span id="unfilled"></span></p>
+                    <p id="author"></p>
+                    <button class="begin-button" id="start" onclick="StartNew()">Begin</button>
+                    <p id="currentQPM"></p>
+                    <p id="currentWPM"></p>
+                    <p id="session-stats"></p>
+
+                    <input class="input-box" id="qpm-input">
+                </div>
+        </div>
+    </main>
+
+    <script src="./assets/js/qpm.js"></script>
+</body>
+</html>

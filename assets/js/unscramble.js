@@ -10,6 +10,7 @@ var recentIDs = [];
 
 //stats this session
 var stats = {
+    maxstreak:0,
     streak:0,
     correct:0,
     incorrect:0
@@ -26,6 +27,16 @@ var sessionStats = document.getElementById('session-stats');
 var currentAnswer = "";
 var currentScramble = [];
 var currentScrambleElements;
+
+var statsOnLoad = JSON.parse(localStorage.getItem('woq_stats_unscramble'));
+console.log(statsOnLoad);
+if(statsOnLoad === null) {
+    statsOnLoad = {
+        correct:0,
+        incorrect:0,
+        maxstreak:0
+    }
+}
 
 //if enter is pressed and no game is currently in session, start one
 document.onkeyup = function(event) {
@@ -82,7 +93,12 @@ function StartNew() {
             var quote = undefined;
             //get a quote with good data and an appropriate length
             for(var i = 0; i < data.quotes.length; i++) {
-                if(!(data.quotes[i].body.toLowerCase().includes('body') || data.quotes[i].body.length < 20 || data.quotes[i].body.length > 100 || recentIDs.includes(data.quotes[i].id))) {
+                if(!(data.quotes[i].body.toLowerCase().includes('body') || 
+                data.quotes[i].author.toLowerCase().includes("adina") ||
+                data.quotes[i].body.length < 20 || 
+                data.quotes[i].body.length > 100 || 
+                recentIDs.includes(data.quotes[i].id) || 
+                !IsAcceptableString(data.quotes[i].body))) {
                     quote = data.quotes[i];
                     break;
                 }
@@ -146,6 +162,10 @@ function Win() {
     currentAnswer = "";
     stats.correct++;
     stats.streak++;
+    stats.maxstreak = Math.max(stats.streak, stats.maxstreak);
+
+    SaveStats();
+
     messageOutput.textContent = "Well done! Current win streak: " + stats.streak + "!\n\nPress 'enter' to continue.";
     UpdateSessionStats(true);
 }
@@ -156,7 +176,18 @@ function Lose() {
     currentAnswer = "";
     stats.incorrect++;
     stats.streak = 0;
+
+    SaveStats();
+
     UpdateSessionStats(false);
+}
+
+function SaveStats() {
+    var newStats = {correct:0,incorrect:0,maxstreak:0};
+    newStats.correct = statsOnLoad.correct + stats.correct;
+    newStats.incorrect = statsOnLoad.incorrect + stats.incorrect;
+    newStats.maxstreak = Math.max(statsOnLoad.maxstreak, stats.maxstreak);
+    localStorage.setItem('woq_stats_unscramble', JSON.stringify(newStats));
 }
 
 function UpdateSessionStats(lastCorrect) {
@@ -169,4 +200,16 @@ function ClearPage() {
     messageOutput.innerHTML = "";
     input.value = "";
     input.focus();
+}
+
+function IsAcceptableCharacter(char) {
+    return 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789,.?\'":; '.includes(char);
+}
+function IsAcceptableString(str) {
+    for(var i = 0; i < str.length; i++) {
+        if(!IsAcceptableCharacter(str[i])) {
+            return false;
+        }
+    }
+    return true;
 }

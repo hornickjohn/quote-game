@@ -1,5 +1,7 @@
 var currentlyTrump;
 
+var recentQuotes = [];
+
 //globals for handling timer
 const timeLimit = 10;
 var timer;
@@ -8,11 +10,24 @@ var timeOutput = document.getElementById('time');
 
 //stats this session
 var stats = {
+    beststreak:0,
     streak:0,
     correct:0,
-    incorrect:0
+    incorrect:0,
+    timedout:0
 }
 var sessionStats = document.getElementById('session-stats');
+
+//local storage stats
+var statsOnLoad = JSON.parse(localStorage.getItem('woq_stats_trumpye'));
+if(statsOnLoad === null) {
+    statsOnLoad = {
+        correct:0,
+        incorrect:0,
+        maxstreak:0,
+        timedout:0
+    }
+}
 
 //navigates to home page
 function quit() {
@@ -32,6 +47,7 @@ function startGame() {
             return response.json();
         })
         .then(function (data) {
+            RecentQuote(data.value);
             document.getElementById("quote-output").textContent = data.value;
         });
     } else {
@@ -48,12 +64,19 @@ function startGame() {
     }
 }
 
+function RecentQuote(content) {
+    recentQuotes.push(content);
+    if(recentQuotes.length > 10) {
+        recentQuotes.splice(0, 1);
+    }
+}
+
 //user guessed trump
 function trump() {
     if(currentlyTrump) {
         Win();
     } else {
-        Lose();
+        Lose(false);
     }
 }
 
@@ -62,20 +85,26 @@ function ye() {
     if(!currentlyTrump) {
         Win();
     } else {
-        Lose();
+        Lose(false);
     }
 }
 
 function Win() {
     stats.correct++;
     stats.streak++;
+    stats.beststreak = Math.max(stats.beststreak, stats.streak);
+    SaveStats();
     clearInterval(timer);
     HideDisplay(false, true, false, true);
     UpdateSessionStats();
 }
-function Lose() {
+function Lose(lostbytime) {
     stats.incorrect++;
     stats.streak = 0;
+    if(lostbytime) {
+        stats.timedout++;
+    }
+    SaveStats();
     clearInterval(timer);
     HideDisplay(false, false, true, true);
     UpdateSessionStats();
@@ -113,7 +142,7 @@ function UpdateTimer() {
         timeOutput.textContent = time;
         if(time <= 0) {
             clearInterval(timer);
-            Lose();
+            Lose(true);
         }
     }, 1000);
 }
@@ -121,6 +150,15 @@ function UpdateTimer() {
 function UpdateSessionStats() {
     sessionStats.textContent = stats.correct + " / " + (stats.correct + stats.incorrect);
     document.getElementById('streak').textContent = stats.streak;
+}
+
+function SaveStats() {
+    var newStats = {correct:0,incorrect:0,maxstreak:0,timedout:0};
+    newStats.correct = statsOnLoad.correct + stats.correct;
+    newStats.incorrect = statsOnLoad.incorrect + stats.incorrect;
+    newStats.maxstreak = Math.max(statsOnLoad.maxstreak, stats.beststreak);
+    newStats.timedout = statsOnLoad.timedout + stats.timedout;
+    localStorage.setItem('woq_stats_trumpye', JSON.stringify(newStats));
 }
 
 //Initialize page
