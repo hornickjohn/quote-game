@@ -4,23 +4,49 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./node_modules/nes.css/css/nes.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./assets/css/unscramble.css">
     <title>Quote Unscramble</title>
 </head>
 <body>
     <main>
-        <div id="timer">
+        <div>
+            <p class="instructions">Instructions:</p>
+        </div>
+        <section class="nes-container is-dark">
+            <section class="message-list">
+                <section class="message -left">
+                  <i class="nes-bcrikko"></i>
+                  <!-- Balloon -->
+                  <div class="nes-balloon from-left is-dark">
+                    <div class= "box" id="content-area">
+                        <p>Press 'enter' and guess what I am trying to say!</p>
+                        <p id="scrambled"></p>
+                        <p id="author"></p>
+                  </div>
+                </section>
+          
+                <section class="message -right">
+                  <!-- Balloon -->
+                  <div class="nes-container is-rounded" class="nes-balloon from-right is-dark">
+                        <input id="input">
+                        <p id="message">Press 'enter' to begin!</p>
+                  </div>
+                  <i class="nes-bcrikko"></i>
+                </section>
+              </section>
+            </section>
+          </section>
+        <div class="timer-style" id="timer">
             Time: <span id="time">60</span>
         </div>
-        <div id="session-stats">
+        <div class="stats-style" id="session-stats">
             0 / 0 - Welcome!
+            <br>
+            <button class="home button">home</button>
         </div>
-        <div id="content-area">
-            <p id="scrambled"></p>
-            <p id="author"></p>
-            <input id="input">
-            <p id="message">Press 'enter' to begin!</p>
-        </div>
+        
     </main>
 
     <script src="./assets/js/unscramble.js"></script>
