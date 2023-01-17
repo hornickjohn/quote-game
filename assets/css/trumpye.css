@@ -6,6 +6,7 @@ header{
 body{
     text-align: center;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-image: url("../images/TrumpKanye.jpg");
 }
 #time{
     margin-top: 30px;
@@ -52,4 +53,29 @@ body{
     margin-top: 30px;
     border-radius: 12px;
     cursor: pointer;
+}
+
+h2{
+    font-size: 60px;
+    color: black;
+}
+
+h3{
+    font-size: 45px;
+    color: black;
+
+}
+
+header{
+    width: 70%;
+    margin: auto;
+
+}
+
+#textBox{
+    max-width: 100%;
+}
+
+.lastPage{
+    font-size: 25px;
 }
