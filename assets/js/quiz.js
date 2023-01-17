@@ -46,12 +46,13 @@ function NewQuestion() {
         })
         .then(function (data) {
             //check for bad or undefined data, or a repeat question
-            if(data.status !== undefined || data.quotes[0].body.toLowerCase().includes('body') || data.quotes[0].body.toLowerCase().includes('<br>') || recentIDs.includes(data.quotes[0].id)) {
+            if(data.status !== undefined || data.quotes[0].body.toLowerCase().includes('body') || data.quotes[0].author.toLowerCase().includes("adina") || data.quotes[0].body.toLowerCase().includes('<br>') || recentIDs.includes(data.quotes[0].id)) {
                 NewQuestion();
                 return;
             }
 
             UpdateTimer();
+            ToggleVisibility(true);
 
             questionOutput.textContent = data.quotes[0].body;
 
@@ -72,7 +73,7 @@ function NewQuestion() {
                 else if(currentButton == correctIndex) {
                     ++currentButton;
                 }
-                else if(data.quotes[i].author !== undefined && !usedAuthors.includes(data.quotes[i].author) && !data.quotes[i].author.toLowerCase().includes('author')) {
+                else if(data.quotes[i].author !== undefined && !usedAuthors.includes(data.quotes[i].author) && !data.quotes[i].author.toLowerCase().includes('author') && !data.quotes[i].author.toLowerCase().includes("adina")) {
                     usedAuthors.push(data.quotes[i].author);
                     answerButtons[currentButton].textContent = data.quotes[i].author;
                     ++currentButton;
@@ -93,7 +94,7 @@ function NewQuestion() {
 }
 
 function ClearPage() {
-    //TODO reset timer and stuff?
+    UpdateSessionStats(-1);
     questionOutput.textContent = "";
     for(var i = 0; i < answerButtons.length; i++) {
         answerButtons[i].textContent = "";
@@ -119,22 +120,23 @@ function UpdateTimer() {
     }, 1000);
 }
 
-//eventIndex 0 = incorrect, 1 = correct, 2 = ran out of time
+//eventIndex -1 = no results, refresh without status text, 0 = incorrect, 1 = correct, 2 = ran out of time
 function UpdateSessionStats(eventIndex) {
     sessionStats.innerHTML = "";
-    var status = document.createElement('i');
-    if(eventIndex !== 2) {
-        status.textContent = 'You got that last quote ';
+    sessionStats.textContent = stats.correct + " / " + (stats.correct + stats.incorrect);
+
+    if(eventIndex >= 0) {
+        var status = document.createElement('i');
         if(eventIndex === 1) {
-            status.textContent += "correct!!!";
-        } else {
-            status.textContent += "incorrect. :(";
+            status.textContent = 'Correct - well done!';
+        } else if(eventIndex === 0) {
+            status.textContent = "Sorry, that's incorrect. :(";
+        } else if(eventIndex === 2) {
+            status.textContent = "Ran out of time on that one. :(";
         }
-    } else {
-        status.textContent = "Ran out of time on that last one. :(";
+        sessionStats.textContent += " - ";
+        sessionStats.append(status);
     }
-    sessionStats.textContent = stats.correct + " / " + (stats.correct + stats.incorrect) + " - ";
-    sessionStats.append(status);
 }
 
 function IncorrectAnswer(event) {
@@ -145,17 +147,19 @@ function IncorrectAnswer(event) {
     }
     stats.streak = 0;
     stats.incorrect++;
+    clearInterval(timer);
+    ToggleVisibility(false);
     SaveStats();
     UpdateSessionStats(ind);
-    NewQuestion();
 }
 function CorrectAnswer(event) {
     stats.streak++;
     stats.correct++;
     stats.maxstreak = Math.max(stats.streak, stats.maxstreak);
+    clearInterval(timer);
+    ToggleVisibility(false);
     SaveStats();
     UpdateSessionStats(1);
-    NewQuestion();
 }
 
 function SaveStats() {
@@ -167,5 +171,17 @@ function SaveStats() {
     localStorage.setItem('woq_stats_quiz', JSON.stringify(newStats));
 }
 
-UpdateTimer();
-NewQuestion();
+function ToggleVisibility(inQuestion) {
+    var newQuestionButton = document.getElementById('start-button');
+    if(inQuestion) {
+        for(var i = 0; i < answerButtons.length; i++) {
+            answerButtons[i].classList.remove("hidden");
+        }    
+        newQuestionButton.classList.add("hidden");
+    } else {
+        for(var i = 0; i < answerButtons.length; i++) {
+            answerButtons[i].classList.add("hidden");
+        }    
+        newQuestionButton.classList.remove("hidden");
+    }
+}
