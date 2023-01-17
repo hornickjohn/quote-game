@@ -18,7 +18,7 @@
     top: 0px; 
     left: 10px;
     color: black;
-    width: 5%; 
+    width: fit-content; 
     padding: 10px;
     border: black solid 4px;
 }
