@@ -14,15 +14,21 @@
 
 .home-button {
     position: absolute; 
+    margin-top: 2px;
     top: 0px; 
     left: 10px;
-    color: whitesmoke;
+    color: black;
     width: 5%; 
-    padding: 20px;
-    border: black solid 5px;
-    
-   
+    padding: 10px;
+    border: black solid 4px;
 }
+
+.home-button:hover{
+    background-color: black; 
+    color: White;
+}
+
+
 .game-align {
     position: relative;
     text-align: center;

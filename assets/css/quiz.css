@@ -1,6 +1,7 @@
 h1 {
     background-color: orange;
     font-size: 50px;
+    border: solid whitesmoke 10px;
 }
 p {
     font-size: 20px;
@@ -48,4 +49,18 @@ body {
     border-radius: 15px;
     margin: 5px;
     cursor: pointer;
+}
+
+.back-button {
+    font-size: 25px;
+    text-align: center;
+    border: solid black 3px;
+    border-radius: 15px;
+    margin-top: 25px;
+    box-shadow: black 3px 2.5px;
+}
+
+.back-button:hover {
+  background-color: wheat; 
+  color: black;
 }

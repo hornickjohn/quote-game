@@ -114,7 +114,48 @@ body{
     color: white;
     text-shadow: cadetblue -3px 4px;
     margin-bottom: 45px;
-
 }
 
+.joke-output {
+    font-family: monospace;
+}
+
+
+
+.bgd{
+    background-image: url(https://www.sciencenews.org/wp-content/uploads/2018/05/050718_EC_numbers_feat.jpg);
+    height: 150vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+} 
+
+.content {
+    position: relative;
+    opacity: 1;
+}
+
+.stats-header {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color:whitesmoke;
+    text-align: center;
+    font-size: 50px;
+    background-color: black;
+    border-bottom: solid whitesmoke 5px;
+    margin-bottom: 15px; ;
+  
+}
+
+.button-back {
+    text-align: center;
+    font-size: 35px;
+    color: whitesmoke;
+    background-color: black;
+    
+}
+
+.button-back:hover{
+    background-color: whitesmoke;
+    color: black;
+}
 
