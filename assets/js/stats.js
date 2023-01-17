@@ -48,8 +48,8 @@ function LoadStats() {
 
         document.getElementById('qpm_maxqpm').textContent = qpmStats.maxqpm;
         document.getElementById('qpm_maxwpm').textContent = qpmStats.maxwpm;
-        document.getElementById('qpm_averageqpm').textContent = qpmStats.totalquotes * 60 / qpmStats.totaltime;
-        document.getElementById('qpm_averagewpm').textContent = qpmStats.totalwords * 60 / qpmStats.totaltime;
+        document.getElementById('qpm_averageqpm').textContent = Math.round(qpmStats.totalquotes * 600 / qpmStats.totaltime) / 10;
+        document.getElementById('qpm_averagewpm').textContent = Math.round(qpmStats.totalwords * 600 / qpmStats.totaltime) / 10;
     } else {
         document.getElementById('qpm_content').classList.add('hidden');
         document.getElementById('qpm_nocontent').classList.remove('hidden');

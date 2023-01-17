@@ -161,6 +161,7 @@ function GetGoodQuote(num, endfunc) {
             quotes = [];
             for(var i = 0; i < data.quotes.length; i++) {
                 if(!data.quotes[i].body.toLowerCase().includes('body') && 
+                !data.quotes[i].author.toLowerCase().includes("adina") && 
                 !recentIDs.includes(data.quotes[i].id) && 
                 IsAcceptableString(data.quotes[i].body)) {
                     quotes.push(data.quotes[i]);
