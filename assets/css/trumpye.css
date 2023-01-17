@@ -1,0 +1,55 @@
+header{
+    font-size: larger;
+    text-align: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+body{
+    text-align: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+#time{
+    margin-top: 30px;
+    font-size: 50px;
+}
+#session-stats{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 30px;
+}
+#quote-output{
+    font-size: 40px;
+}
+#trumpQuote{
+    margin-top: 30px;
+    background-color: red;
+    font-size: 16px;
+    padding: 15px 32px;
+    margin-right: 20px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+#yeQuote{
+    margin-top: 30px;
+    color: azure;
+    background-color: blue;
+    font-size: 16px;
+    padding: 15px 32px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+#start{
+    color: azure;
+    background: linear-gradient(-60deg, red 50%, blue 50% );
+    margin-top: 40px;
+    font-size: x-large;
+    border-radius: 12px;
+    cursor: pointer;
+}
+#go-home{
+    color: azure;
+    background: linear-gradient(-60deg,blue 50%, red 50%);
+    font-size: 15px;
+    margin-top: 30px;
+    border-radius: 12px;
+    cursor: pointer;
+}

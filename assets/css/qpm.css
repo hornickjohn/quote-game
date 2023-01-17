@@ -1,0 +1,72 @@
+.image-background{
+    height: 100vh;
+    opacity: .2;
+}
+
+.instructions{
+    position: absolute; 
+    top: 0; 
+    color: whitesmoke;
+    width: 98%; 
+    padding: 20px;
+
+}
+
+.home-button {
+    position: absolute; 
+    top: 0px; 
+    left: 10px;
+    color: whitesmoke;
+    width: 5%; 
+    padding: 20px;
+    border: black solid 5px;
+    
+   
+}
+.game-align {
+    position: relative;
+    text-align: center;
+    font-size: 25px;
+    color: yellow;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    background-color: cornflowerblue ;
+    height: 100vh;
+    border: solid black 25px;
+}
+
+.box-content{
+    position: absolute; 
+    bottom: 0; 
+    background: rgb(0, 0, 0); 
+    background: rgba(0, 0, 0, 0.5); 
+    color: whitesmoke;
+    width: 98%; 
+    padding: 20px; 
+}
+
+
+.begin-button {
+    font-size: 25px;
+} 
+
+.input-box{
+    height: 25px;
+    width: 350px;
+}
+
+.hidden {
+    display:none;
+}
+#filled {
+    color:greenyellow;
+}
+#unfilled {
+    color:black;
+}
+#wrong {
+    color:red;
+}
+#qpm-input {
+    position: absolute;
+    left:-500px;
+}
