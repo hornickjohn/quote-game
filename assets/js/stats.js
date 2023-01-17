@@ -34,8 +34,8 @@ function LoadStats() {
         document.getElementById('unscramble_content').classList.remove('hidden');
         document.getElementById('unscramble_nocontent').classList.add('hidden');
 
-        document.getElementById('unscramble_correct').textContent = unscramble.correct;
-        document.getElementById('unscramble_incorrect').textContent = unscramble.incorrect;
+        document.getElementById('unscramble_correct').textContent = unscrambleStats.correct;
+        document.getElementById('unscramble_incorrect').textContent = unscrambleStats.incorrect;
         document.getElementById('unscramble_maxstreak').textContent = unscrambleStats.maxstreak;
     } else {
         document.getElementById('unscramble_content').classList.add('hidden');
