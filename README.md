@@ -39,4 +39,4 @@ N/A
 
 ## As-Deployed Screenshot
 
-![Image of Website](./screenshot.png)
+![Image of Website](./assets/images/screenshot.png)
