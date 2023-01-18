@@ -1,7 +1,7 @@
 const key = '3c8e64354d489af483aa7662746a4745';
 
 //page elements for quiz questions
-var questionOutput = document.getElementById('question');
+var quoteOutput = document.getElementById('quote');
 var answerButtons = document.getElementsByClassName('answer-button');
 var correctIndex;
 var recentIDs = [];
@@ -32,7 +32,7 @@ var timer;
 var time;
 var timeOutput = document.getElementById('time');
 
-function NewQuestion() {
+function NewQuote() {
     ClearPage();
 
     fetch('https://favqs.com/api/quotes', {
@@ -47,14 +47,14 @@ function NewQuestion() {
         .then(function (data) {
             //check for bad or undefined data, or a repeat question
             if(data.status !== undefined || data.quotes[0].body.toLowerCase().includes('body') || data.quotes[0].author.toLowerCase().includes("adina") || data.quotes[0].body.toLowerCase().includes('<br>') || recentIDs.includes(data.quotes[0].id)) {
-                NewQuestion();
+                NewQuote();
                 return;
             }
 
             UpdateTimer();
             ToggleVisibility(true);
 
-            questionOutput.textContent = data.quotes[0].body;
+            quoteOutput.textContent = data.quotes[0].body;
 
             //set correct answer button
             correctIndex = Math.floor(Math.random() * 4);
@@ -81,7 +81,7 @@ function NewQuestion() {
             }
             //if we reached the end of the data and haven't filled all the buttons, restart
             if(!(currentButton >= 4)) {
-                NewQuestion();
+                NewQuote();
                 return;
             }
 
@@ -95,7 +95,7 @@ function NewQuestion() {
 
 function ClearPage() {
     UpdateSessionStats(-1);
-    questionOutput.textContent = "";
+    quoteOutput.textContent = "";
     for(var i = 0; i < answerButtons.length; i++) {
         answerButtons[i].textContent = "";
 
@@ -171,17 +171,17 @@ function SaveStats() {
     localStorage.setItem('woq_stats_quiz', JSON.stringify(newStats));
 }
 
-function ToggleVisibility(inQuestion) {
-    var newQuestionButton = document.getElementById('start-button');
-    if(inQuestion) {
+function ToggleVisibility(inQuote) {
+    var newQuoteButton = document.getElementById('start-button');
+    if(inQuote) {
         for(var i = 0; i < answerButtons.length; i++) {
             answerButtons[i].classList.remove("hidden");
         }    
-        newQuestionButton.classList.add("hidden");
+        newQuoteButton.classList.add("hidden");
     } else {
         for(var i = 0; i < answerButtons.length; i++) {
             answerButtons[i].classList.add("hidden");
         }    
-        newQuestionButton.classList.remove("hidden");
+        newQuoteButton.classList.remove("hidden");
     }
 }

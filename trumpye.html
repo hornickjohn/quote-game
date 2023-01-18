@@ -10,10 +10,11 @@
     <link rel="stylesheet" href="./assets/css/trumpye.css">
 </head>
 <body>
-    <h1> <img src="./assets/images/TrumpYe.jpg" alt=""></h1>
+    <h1> <img src="./assets/images/TrumpYe.jpg" alt="" style="border: 5px solid #000000;"></h1>
 <header>
     <div class ="quiz-details">
-        <div id="Welcome message">
+        <div class = "container" id = "textBox">
+
             <h2 id ="Welcome"> Welcome to the TrumpYe Quote Guessing Game </h2>
             <h3 id ="Instructions">Instructions: In this game, you will be given a random quote from either Donald Trump or Kanye West.
                 It is your job to decide who the quote came from. You will be given 10 seconds to answer each question so choose wisely! Good luck! 
@@ -34,11 +35,11 @@
 </div>
 
 <div class="lastPage">
-    <div id="winner">
-        <b>YOU WIN!</b><br>You're a TrumpYE Expert! Current streak: <span id="streak"></span>. Another round?
+    <div id="winner" class = "container">
+        <b>YOU WIN!</b><br><b>You're a TrumpYE Expert! Current streak: <span id="streak"></span>. Another round?</b>
     </div>
-    <div id="loser">
-        <b>YOU LOSE!</b><br>Sorry, you must think Trump and Ye are the same person. Try again?
+    <div id="loser" class="container">
+        <b>YOU LOSE!</b><br><b>Sorry, you must think Trump and Ye are the same person. Try again?</b>
     </div>
     <button onclick="startGame()" id="start">Start</button>
 </div>
