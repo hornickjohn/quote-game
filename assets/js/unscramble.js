@@ -22,7 +22,7 @@ var timer;
 var time;
 var timeOutput = document.getElementById('time');
 
-var sessionStats = document.getElementById('session-stats');
+var sessionStats = document.getElementById('session-output');
 
 var currentAnswer = "";
 var currentScramble = [];
