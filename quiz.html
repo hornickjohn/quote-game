@@ -12,8 +12,8 @@
     <button class="back-button" onclick="location.href='./index.html';"> Home </button>
 </header>
 <body>
-    <h1 style="text-align:center">Programming Quiz</h1>
-    <p style="text-align:center">For every question, there will be a 10 second timer. Good luck! </p>
+    <h1 style="text-align:center">Quote Quiz</h1>
+    <p style="text-align:center">Instructions: You will have four options to decide who said what in this quote quiz! For every quote displayed, there will be a timer counting down from 10 seconds until an answer is chosen. Good luck! </p>
     <div id="timer">
         Time: <span id="time">10</span>
     </div>
@@ -21,10 +21,10 @@
         0 / 0 - Welcome!
     </div>
     <div class="container">
-    <p id="question"></p>
+    <p id="quote"></p>
         <div class="btn-group">
             <ul style="list-style-type:none;">
-                <button id="start-button" onclick="NewQuestion()">New Question</button>
+                <button class="start-button:" onclick="NewQuote()">New Quote</button>
                 <li><button class="answer-button hidden"></button></li>
                 <li><button class="answer-button hidden"></button></li>
                 <li><button class="answer-button hidden"></button></li>
