@@ -1,4 +1,4 @@
-const key = '3c8e64354d489af483aa7662746a4745';
+const key = process.env.QUOTE_API_KEY;
 
 //page elements for game
 var scrambledOutput = document.getElementById('scrambled');
